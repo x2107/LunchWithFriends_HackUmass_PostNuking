@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ARK - Space Booking App</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/15181efa86.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <div class="notification-container"></div>
+    <section class="container">
+        <div class="columns is-multiline">
+            <div class="column is-8 is-offset-2 register">
+                <div class="columns">
+                    <div class="column left">
+                        <h1 class="title is-1 has-text-white">ARK</h1>
+                        <h2 class="subtitle colored is-4">Space Booking App</h2>
+                        <p>The solution to COVID-restricted room reservations.</p>
+                    </div>
+                    <div class="column right has-text-centered">
+                        <h1 class="title is-4 has-text-white">Book An Appointment Now!</h1>
+                        <button id="login" class="button is-primary is-medium">Login</button>
+                        <button id="register" class="button is-primary is-medium">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-8 is-offset-2">
+                <br>
+                <nav class="level">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <span class="icon">
+                                <i class="fab fa-twitter"></i>
+                            </span> &emsp;
+                            <span class="icon">
+                                <i class="fab fa-facebook"></i>
+                            </span> &emsp;
+                            <span class="icon">
+                                <i class="fab fa-instagram"></i>
+                            </span> &emsp;
+                            <span class="icon">
+                                <i class="fab fa-github"></i>
+                            </span> &emsp;
+                            <span class="icon">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <small class="level-item">
+                            &copy; ARK - Google CSSI 2021. All Rights Reserved.
+                        </small>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Login</p>
+            </header>
+            <section class="modal-card-body has-text-centered">
+                <button class="button is-medium is-info is-outlined" onclick="signInWithGoogle()">Sign in with
+                    Google</button>
+                <hr>
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input" type="email" placeholder="Email" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <!-- <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span> -->
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Password" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <button class="button is-link" onclick="signInWithEmail()">Login</button>
+                <button class="button is-link is-light" onclick="toggleLoginModal()">Cancel</button>
+            </section>
+        </div>
+    </div>
+
+
+    <!-- Register Modal -->
+    <div class="modal" id="signUpModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Sign Up</p>
+            </header>
+            <section class="modal-card-body has-text-centered">
+                <button class="button is-medium is-info is-outlined" onclick="signInWithGoogle()">Sign Up With
+                    Google</button>
+                <hr>
+                <form action="">
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="email" placeholder="Email" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input id="password" class="input" type="password" placeholder="Password" minlength="6"
+                                required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input id="confirm_password" class="input" type="password" placeholder="Re-enter Password"
+                                minlength="6" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <input type="submit" class="button is-link">SignUp</input>
+                    <button class="button is-link is-light" onclick="toggleSignUpModal()">Cancel</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

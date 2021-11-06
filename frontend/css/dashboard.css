@@ -1,0 +1,112 @@
+html,
+body {
+  font-family: "Open Sans";
+  height: 100%;
+}
+
+img {
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.body-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-button {
+  width: 250px;
+  margin-left: 30px;
+}
+
+.modal-section-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.square {
+  height: 300px;
+  width: 300px;
+  background-color: #555;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+.booking-title {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-left-header {
+  padding: 10px;
+}
+
+.spacer {
+  padding: 10px;
+}
+
+.no-friends {
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.book-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.regulations {
+  display: flex;
+  flex-direction: column;
+}
+
+.collaborator-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-error {
+  color: red;
+  font-size: 15px;
+  padding: 5px;
+  display: none;
+}
+
+.collaborator-email:hover {
+  text-decoration: line-through;
+}
+
+.avaliable-times-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-container {
+  position: fixed;
+  width: 100%;
+  /* To get above everything */
+  z-index: 99;
+}
+
+.accordions .accordion .accordion-header + .accordion-body {
+  overflow: auto;
+}
+
+.sticky-footer {
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  position: fixed;
+  /* text-align: left; */
+  width: 100%;
+  padding: 50px;
+}
