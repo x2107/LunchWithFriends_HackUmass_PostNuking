@@ -10,7 +10,7 @@ from flask import (
 )
 from flask_login import current_user, login_user, logout_user, login_required
 
-from app import db, bcrypt
+from app import db, bcrypt, login_manager
 from app.models import User
 from app.utils import send_pre_register_email, Serializer, send_reset_email
 from app.forms import (
@@ -18,11 +18,16 @@ from app.forms import (
     RegisterForm,
     LoginForm,
     RequestResetForm,
-    UpdateAccountForm,
+    # UpdateAccountForm,
     ResetPasswordForm,
 )
 
 main_bp = Blueprint("main", __name__)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 
 @main_bp.route("/")
@@ -47,7 +52,7 @@ def pre_register():
             "A confirmation email has been sent to your account, please follow link there to complete registration",
             "info",
         )
-        return redirect(url_for("users.pre_register"))
+        return redirect(url_for("main.pre_register"))
     return render_template("pre_register.html", title="Register", form=form)
 
 
@@ -84,11 +89,6 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            if user.zipcode == "none":
-                # None needs to be added to avoid keyerror
-                session.pop("zipcode", None)
-            else:
-                session["zipcode"] = user.zipcode
             login_user(user, remember=form.remember.data)  # remember me is a true/false value
             next_page = request.args.get(
                 "next"
@@ -102,26 +102,21 @@ def login():
 @main_bp.route("/logout")
 def logout():
     logout_user()
-    session.pop("zipcode", None)
     return redirect(url_for("main.home"))
 
 
-@main_bp.route("/account", methods=["GET", "POST"])
-@login_required
-def account():
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.zipcode = form.zipcode.data
-        db.session.commit()
-        # have to update zipcode in session (because it is stored in cookie)
-        session["zipcode"] = form.zipcode.data
-        flash("Your account has been updated!", "success")
-        return redirect(url_for("users.account"))
-    elif request.method == "GET":
-        form.username.data = current_user.username
-        form.zipcode.data = current_user.zipcode
-    return render_template("account.html", title="Account", form=form)
+# @main_bp.route("/account", methods=["GET", "POST"])
+# @login_required
+# def account():
+#     form = UpdateAccountForm()
+#     if form.validate_on_submit():
+#         current_user.username = form.username.data
+#         db.session.commit()
+#         flash("Your account has been updated!", "success")
+#         return redirect(url_for("users.account"))
+#     elif request.method == "GET":
+#         form.username.data = current_user.username
+#     return render_template("account.html", title="Account", form=form)
 
 
 @main_bp.route("/reset_password", methods=["GET", "POST"])

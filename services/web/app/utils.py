@@ -18,7 +18,7 @@ def send_pre_register_email(email):
         recipients=[email],
     )
     msg.body = f"""To create an account, visit the following link:
-{url_for('users.register', token=serialize({'email': email}), _external=True)}
+{url_for('main.register', token=serialize({'email': email}), _external=True)}
 
 If you did not make this request, then simply ignore this email and no changes will be made.
 """
@@ -34,7 +34,7 @@ def send_reset_email(user):
         recipients=[user.email],
     )
     msg.body = f"""To reset your password, visit the following link:
-{url_for('users.reset_token', token=token, _external=True)}
+{url_for('main.reset_token', token=token, _external=True)}
 
 If you did not make this request, then simply ignore this email and no changes will be made.
 """

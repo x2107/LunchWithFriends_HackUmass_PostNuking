@@ -39,23 +39,23 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 
-class UpdateAccountForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
-    zipcode = StringField("Zipcode")
-    submit = SubmitField("Update")
+# class UpdateAccountForm(FlaskForm):
+#     username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
+#     zipcode = StringField("Zipcode")
+#     submit = SubmitField("Update")
 
-    def validate_username(self, username):
-        if username.data != current_user.username:
-            user = User.query.filter_by(username=username.data).first()
-            if user:  # if user exists in the User table
-                raise ValidationError("That username is taken. Please choose a diffferent one.")
+#     def validate_username(self, username):
+#         if username.data != current_user.username:
+#             user = User.query.filter_by(username=username.data).first()
+#             if user:  # if user exists in the User table
+#                 raise ValidationError("That username is taken. Please choose a diffferent one.")
 
-    def validate_zipcode(self, zipcode):
-        valid_zip = re.search(r"^\d{5}$", zipcode.data)
-        if not valid_zip or not weather_from_api(zipcode.data, "imperial"):
-            raise ValidationError(
-                "That doesn't look like a US zip code. Please try a different one."
-            )
+#     def validate_zipcode(self, zipcode):
+#         valid_zip = re.search(r"^\d{5}$", zipcode.data)
+#         if not valid_zip or not weather_from_api(zipcode.data, "imperial"):
+#             raise ValidationError(
+#                 "That doesn't look like a US zip code. Please try a different one."
+#             )
 
 
 class RequestResetForm(FlaskForm):
