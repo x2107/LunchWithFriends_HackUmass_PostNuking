@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Friends2Lunch - Dashboard</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link href="css/bulma-calendar.min.css" rel="stylesheet">
+    <link href="css/bulma-accordion.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <style type="text/css">
+
+    </style>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.3.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.3.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.3.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+</head>
+
+<body class="has-background-light">
+    <div class="notification-container"></div>
+    <div class="header-container">
+        <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                        Home
+                    </a>
+                </div>
+
+                <div class="navbar-end" id="navbar-end">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="#" class="navbar-link" id="user"></a>
+                        <div class="navbar-dropdown">
+                            <a id="myAppointments" class="navbar-item">My Appointments</a>
+                            <hr class="navbar-divider">
+                            <a id="logOut" class="navbar-item">Log out</a>
+                        </div>
+                    </div>
+                    <div id="user" class="navbar-item">
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="body-container container mt-5">
+        <div class="button-container">
+            <button class="button book-button is-info" id="butt">
+                <span class="icon">
+                    <i class="fas fa-calendar-check"></i>
+                </span>
+                <span>Book</span>
+            </button>
+        </div>
+        <div id="calendardisplay">
+            <iframe src="" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <footer class="footer has-background-light has-text-centered py-6">
+        <div class="footer-text-container">
+            © LunchWithFriends - Google CSSI 2021. All Rights Reserved.
+        </div>
+    </footer>
+
+    <div id="bookModal" class="modal">
+        <div class="modal-background"></div> <!-- Makes the background dark-->
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <div class="booking-title">
+                    <h1>Book a Room</h1>
+                </div>
+            </header>
+            <div class="modal-card-body">
+                <div class="modal-section-container">
+                    <div class="modal-left">
+
+                        <label class="label">Appointment Name</label>
+                        <div class="control">
+                            <input class="input is-normal" id="appointment-name" placeholder="Name of Appointment"
+                                type="text">
+                        </div>
+
+                        <span class="spacer"></span>
+
+                        <label class="label">Select a Room</label>
+                        <div class="control">
+                            <div class="select">
+                                <select class="option-container" id="options-container"></select>
+
+                            </div>
+                        </div>
+
+                        <span class="spacer"></span>
+
+                        <label class="label">Invite Collaborators</label>
+                        <div class="control">
+                            <input class="input is-normal" id="addCollaborators" placeholder="Invite by Email"
+                                type="text">
+                            <p class="email-error" id="email-error">Valid Email Address Required</p>
+                        </div>
+
+                        <span class="spacer"></span>
+
+                        <label class="label">Invited:</label>
+                        <div id="collaborator-container" class="collaborator-container">
+                            <p class="no-friends" id="no-friends">Currently no one invited</p>
+                        </div>
+                    </div>
+
+                    <span class="spacer"></span>
+
+                    <div class="modal-right">
+                        <label class="label">Date and Time Selector</label>
+                        <input id="embeded-calendar" type="datetime">
+
+                        <div class="book-button-container">
+                            <button class="button is-danger is-light" id="cancel">Cancel</button>
+                            <span class=" spacer"></span>
+                            <button class="button is-success is-light" id="book">Book</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="modal-card-foot">
+                <div class="regulations">
+                    <label class="label"></label>
+                    <p></p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div id="appointmentsModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">My Appointments</p>
+            </header>
+            <section class="modal-card-body">
+                <div class="accordions"></div>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success">Close</button>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+<script src="js/bulma-calendar.min.js"></script>
+<script src="js/bulma-accordion.min.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+<script type="module" src="js/calendar.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.7/jstz.js"></script>
+<script src="js/calendardisplay.js"></script>
+
+</html>
