@@ -1,11 +1,12 @@
+from flask import current_app, url_for
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from app import app, mail
 from flask_mail import Message
-from flask import url_for
+
+from app import mail
 
 
 def serialize(content, valid_time=1800):
-    s = Serializer(app.config["SECRET_KEY"], valid_time)
+    s = Serializer(current_app.config["SECRET_KEY"], valid_time)
     return s.dumps(content).decode("utf-8")
 
 
