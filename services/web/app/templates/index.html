@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ARK - Space Booking App</title>
+    <title>Friends2Lunch</title>
     <link rel="icon" type="image/png" href="img/favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/15181efa86.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
 </head>
 
 <body>
@@ -20,12 +20,12 @@
             <div class="column is-8 is-offset-2 register">
                 <div class="columns">
                     <div class="column left">
-                        <h1 class="title is-1 has-text-white">ARK</h1>
-                        <h2 class="subtitle colored is-4">Space Booking App</h2>
-                        <p>The solution to COVID-restricted room reservations.</p>
+                        <h1 class="title is-3 has-text-white">Friends2Lunch</h1>
+                        <h2 class="subtitle colored is-4">Invite your friends!</h2>
+                        <p>The solution to awkward invites!</p>
                     </div>
                     <div class="column right has-text-centered">
-                        <h1 class="title is-4 has-text-white">Book An Appointment Now!</h1>
+                        <h1 class="title is-4 has-text-white">Share your schedule!</h1>
                         <button id="login" class="button is-primary is-medium">Login</button>
                         <button id="register" class="button is-primary is-medium">Sign Up</button>
                     </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="level-right">
                         <small class="level-item">
-                            &copy; ARK - Google CSSI 2021. All Rights Reserved.
+                            &copy; F2Lunch - HackUMass 2021. All Rights Reserved.
                         </small>
                     </div>
                 </nav>
