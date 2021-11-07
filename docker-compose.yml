@@ -16,6 +16,8 @@ services:
     image: postgres:13-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_USER=l2f
       - POSTGRES_PASSWORD=l2f
