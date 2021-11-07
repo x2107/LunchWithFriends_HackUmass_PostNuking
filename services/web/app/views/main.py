@@ -31,11 +31,13 @@ def load_user(user_id):
 
 
 @main_bp.route("/")
+@login_required
 def index():
     return render_template("index.html")
 
 
 @main_bp.route("/dashboard", methods=["GET", "POST"])
+# @login_required
 def dashboard():
     return render_template("dashboard.html")
 
@@ -58,8 +60,8 @@ def pre_register():
 
 @main_bp.route("/register/<token>", methods=["GET", "POST"])
 def register(token):
-    if current_user.is_authenticated:
-        return redirect(url_for("main.home"))
+    # if current_user.is_authenticated:
+    # return redirect(url_for("main.home"))
     # decode token and try to get email
     s = Serializer(current_app.config["SECRET_KEY"])
     email = None
@@ -69,7 +71,7 @@ def register(token):
         pass
     if email is None:
         flash("That is an invalid or expired token", "warning")
-        return redirect(url_for("users.pre_register"))
+        return redirect(url_for("main.pre_register"))
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
@@ -77,7 +79,7 @@ def register(token):
         db.session.add(user)
         db.session.commit()
         flash("Your account has been created! You are now able to login.", "success")
-        return redirect(url_for("users.login"))
+        return redirect(url_for("main.login"))
     return render_template("register.html", title="Register", form=form)
 
 
