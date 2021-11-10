@@ -216,7 +216,7 @@ jspm_packages/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+.env.dev
 
 # next.js build output
 .next
